@@ -85,6 +85,7 @@ namespace BulkyBook.Areas.Admin.Controllers
 					if(productVm.Product.ImageUrl != null)
 					{
 						//this is an edit we have to remove old image
+
 						var imagePath = Path.Combine(webRootPath, productVm.Product.ImageUrl.TrimStart('\\'));
 						if (System.IO.File.Exists(imagePath))
 						{
@@ -118,6 +119,25 @@ namespace BulkyBook.Areas.Admin.Controllers
 				_unitOfWork.Save();
 				return RedirectToAction(nameof(Index));
 			}
+			else
+			{
+				productVm.CategoryList = _unitOfWork.Category.GetAll().Select(i => new SelectListItem
+				{
+					Text = i.Name,
+					Value = i.Id.ToString()
+
+				});
+				productVm.CoverTypeList = _unitOfWork.CoverType.GetAll().Select(i => new SelectListItem
+				{
+					Text = i.Name,
+					Value = i.Id.ToString()
+
+				});
+				if(productVm.Product.Id != 0)
+				{
+					productVm.Product = _unitOfWork.Product.Get(productVm.Product.Id);
+				}
+			}
 			return View(productVm.Product);
 		}
 
@@ -138,6 +158,12 @@ namespace BulkyBook.Areas.Admin.Controllers
 			if (objFromDb == null)
 			{
 				return Json(new { success = false, message = "Error While Deleting" });
+			}
+			string webRootPath = _hostEnvironment.WebRootPath;
+			var imagePath = Path.Combine(webRootPath, objFromDb.ImageUrl.TrimStart('\\'));
+			if (System.IO.File.Exists(imagePath))
+			{
+				System.IO.File.Delete(imagePath);
 			}
 			_unitOfWork.Product.Remove(objFromDb);
 			_unitOfWork.Save();
