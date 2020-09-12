@@ -7,12 +7,18 @@ using System.Threading.Tasks;
 
 namespace BulkyBook.Models
 {
-	public class Category
-	{
+    public class Company
+    {
 		public int Id { get; set; }
-		[Display(Name="Category Name")]
 		[Required]
 		[MaxLength(50)]
 		public string Name { get; set; }
+		public string StreetAddress { get; set; }
+		public string City { get; set; }
+		public string State { get; set; }
+		public string PostalCode { get; set; }
+		public string PhoneNumber { get; set; }
+
+		public bool IsAuthorizedCompany { get; set; }
 	}
 }
