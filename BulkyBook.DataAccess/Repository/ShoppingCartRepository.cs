@@ -9,20 +9,17 @@ using System.Threading.Tasks;
 
 namespace BulkyBook.DataAccess.Repository
 {
-    public class OrderDetailsRepository : Repository<OrderDetails>, IOrderDetailsRepository
-	{
+    public class ShoppingCartRepository : Repository<ShoppingCart>, IShoppingCartRepository
+    {
 		private readonly ApplicationDbContext _db;
-		public OrderDetailsRepository(ApplicationDbContext db ): base(db)
+		public ShoppingCartRepository(ApplicationDbContext db) : base(db)
 		{
 			_db = db;
 		}
 
-
-		public void  Update(OrderDetails orderDetails)
+		public void Update(ShoppingCart cart)
 		{
-			//var objdb = _db.OrderDetails.FirstOrDefault(s => s.Id == orderDetails.Id);
-
-			_db.Update(orderDetails);
+			_db.Update(cart);
 		}
-    }
+	}
 }

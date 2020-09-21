@@ -1,4 +1,5 @@
 ﻿using BulkyBook.DataAccess.Data;
+using BulkyBook.DataAccess.Repository.IRepository;
 using BulkyBook.Models;
 using System;
 using System.Collections.Generic;
@@ -17,5 +18,11 @@ namespace BulkyBook.DataAccess.Repository
             _db = db;
 		}
         
+
+
+        public void Update (OrderHeader obj)
+		{
+            _db.Update(obj)              ;
+		} 
     }
 }
