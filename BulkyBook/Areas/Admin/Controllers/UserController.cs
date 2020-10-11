@@ -19,10 +19,12 @@ namespace BulkyBook.Areas.Admin.Controllers
 	public class UserController : Controller
 	{
 		private readonly ApplicationDbContext _db;
+		private readonly IUnitOfWork _unitOfWork;
 
-		public UserController(ApplicationDbContext db)
+		public UserController(ApplicationDbContext db,IUnitOfWork unitOfWork)
 		{
 			_db = db;
+			_unitOfWork = unitOfWork;
 		}
 		public IActionResult Index()
 		{
@@ -35,6 +37,7 @@ namespace BulkyBook.Areas.Admin.Controllers
 		public IActionResult GetAll()
 		{
 			var userList = _db.ApplicationUsers.Include(u => u.Company).ToList();
+			//var userList = _unitOfWork.ApplicationUser.GetAll(includeProperties: "Company");
 			var userRole = _db.UserRoles.ToList();
 			var roles = _db.Roles.ToList();
 

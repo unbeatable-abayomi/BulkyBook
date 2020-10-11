@@ -79,7 +79,7 @@ namespace BulkyBook.Areas.Customers.Controllers
 				_unitOfWork.Save();
 				var count = _unitOfWork.ShoppingCart.GetAll(c => c.ApplicationUserId == CartObject.ApplicationUserId).ToList().Count();
 				//HttpContext.Session.SetObject(SD.ssShoppingCart, CartObject);
-				HttpContext.Session.SetInt32(SD.ssShoppingCart,count);
+				HttpContext.Session.SetInt32(SD.ssShoppingCart,count);// this only sets an integer to a session
 				//var obj = HttpContext.Session.GetObject<ShoppingCart>(SD.ssShoppingCart);
 				return RedirectToAction(nameof(Index));
 			}

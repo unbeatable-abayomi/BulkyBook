@@ -24,7 +24,7 @@ namespace BulkyBook.Models
 		public Company Company { get; set; }
 		public string PostalCode { get; set; }
 
-		[NotMapped]
+		[NotMapped] //means it's not added/pushed to the database
 		public string Role { get; set; }
 
 	}
